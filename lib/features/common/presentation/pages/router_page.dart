@@ -1,5 +1,5 @@
 import 'package:cat_breeds/core/navigation.dart';
-import 'package:cat_breeds/features/cats/presentation/pages/cats_home_page.dart';
+import 'package:cat_breeds/features/cat_breed/presentation/pages/cat_breeds_home_page.dart';
 import 'package:flutter/material.dart';
 
 /// A page that redirects to correct page on app inits.
