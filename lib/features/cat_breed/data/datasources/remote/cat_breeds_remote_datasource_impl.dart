@@ -39,4 +39,31 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
       throw UnknownFailure.exception;
     }
   }
+
+  @override
+  Future<CatBreedModel> getCatBreed(int catBreedId) async {
+    try{
+      final url = "$baseUrl/$catBreedId?api_key=$apiKey";
+      final response = await HttpWrapper.get(
+        client: client,
+        url: url,
+        headers: header,
+      );
+      if(response.statusCode == 200){
+        return catBreedModelFromJson(response.body);
+      }else{
+        //TODO: Terminar
+        // await loggingRepository.logMessage(
+        //   "startWorkshift /worker/iniciarTurno/$workerId EXCEPTION: BODY: none RESPONSE: ${response.body}",
+        // );
+        throw invalidDataFailureFromMap(response.body);
+      }
+    } on SocketException {
+      throw NetworkFailure.exception;
+    } on InvalidDataFailure{
+      rethrow;
+    }catch(e){
+      throw UnknownFailure.exception;
+    }
+  }
 }

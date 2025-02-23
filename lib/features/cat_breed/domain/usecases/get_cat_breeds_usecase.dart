@@ -13,7 +13,6 @@ class GetCatBreedsUseCase implements UseCase<List<CatBreedEntity>, GetCatBreedsP
   Future<Either<Failure, List<CatBreedEntity>>> call(GetCatBreedsParams params) async {
     return await catBreedsRepository.getCatBreeds(params);
   }
-
 }
 
 class GetCatBreedsParams {

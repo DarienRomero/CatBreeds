@@ -2,6 +2,7 @@ import 'package:cat_breeds/features/cat_breed/data/datasources/remote/cat_breeds
 import 'package:cat_breeds/features/cat_breed/data/datasources/remote/cat_breeds_remote_datasource_impl.dart';
 import 'package:cat_breeds/features/cat_breed/data/repositories/cat_breeds_repository_impl.dart';
 import 'package:cat_breeds/features/cat_breed/domain/repositories/cat_breeds_repository.dart';
+import 'package:cat_breeds/features/cat_breed/domain/usecases/get_cat_breed_usecase.dart';
 import 'package:cat_breeds/features/cat_breed/domain/usecases/get_cat_breeds_usecase.dart';
 import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -15,10 +16,12 @@ Future<void> initializeServiceLocator() async {
   //ACTIVITIES_BLOC
 
   serviceLocator.registerLazySingleton(() => GetCatBreedsUseCase(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => GetCatBreedUseCase(serviceLocator()));
 
   serviceLocator.registerFactory(
     () => CatBreedsBloc(
       getCatBreedsUseCase: serviceLocator(),
+      getCatBreedUseCase: serviceLocator(),
     ),
   );
 

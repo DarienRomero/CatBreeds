@@ -21,4 +21,9 @@ class CatWeightEntity extends Equatable{
     metric: metric ?? this.metric,
   );
 
+  static CatWeightEntity get empty => const CatWeightEntity(
+    imperial: '',
+    metric: '',
+  );
+
 }

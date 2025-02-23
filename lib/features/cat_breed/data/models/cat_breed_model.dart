@@ -4,6 +4,7 @@ import 'package:cat_breeds/features/cat_breed/data/models/cat_weight_model.dart'
 import 'package:cat_breeds/features/cat_breed/domain/entities/cat_breed_entity.dart';
 
 List<CatBreedModel> catBreedsModelFromJson(String str) => List<CatBreedModel>.from(json.decode(str).map((x) => CatBreedModel.fromJson(x)));
+CatBreedModel catBreedModelFromJson(String str) => CatBreedModel.fromJson(json.decode(str));
 
 class CatBreedModel extends CatBreedEntity {
   const CatBreedModel({
