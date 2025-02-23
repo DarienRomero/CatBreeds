@@ -1,5 +1,5 @@
 import 'package:cat_breeds/features/cat_breed/presentation/widgets/cat_breeds_list.dart';
-import 'package:cat_breeds/features/common/presentation/widgets/custom_text_field.dart';
+import 'package:cat_breeds/features/cat_breed/presentation/widgets/cat_breeds_search_input.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/scaffold_wrapper.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/v_spacing.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +10,7 @@ class CatsHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWrapper(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text("Cat Breeds"),
         centerTitle: true,
@@ -17,10 +18,7 @@ class CatsHomePage extends StatelessWidget {
       body: const SingleChildScrollView(
         child: Column(
           children: [
-            CustomTextField(
-              hintText: "Search by breed...", 
-              label: ""
-            ),
+            CatBreedsSearchInput(),
             VSpacing(2),
             CatBreedsList()
           ],

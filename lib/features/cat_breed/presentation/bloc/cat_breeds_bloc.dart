@@ -20,8 +20,9 @@ class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
     catBreedsList: const [],
     catBreedsListError: false,
     catBreedsListLoading: false,
-    catBreedsListPage: 1,
+    catBreedsListPage: defaultFirstPage,
     catBreedsLimitReached: false,
+    catBreedsSearchText: "",
     catBreedListLoading: false,
     catBreedListError: false,
     catBreedList: CatBreedEntity.empty,
@@ -29,13 +30,13 @@ class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
     on<StartGetCatBreeds>((event, emit) async {
       if(event.reset){
         emit(state.copyWith(
-          catBreedsListPage: 1,
+          catBreedsListPage: defaultFirstPage,
           catBreedsListLoading: false,
           catBreedsListError: false,
           catBreedsList: [],
+          catBreedsSearch: "",
           catBreedsLimitReached: false
         ));
-        return;
       }
       if(state.catBreedsListLoading) return;
       if(state.catBreedsLimitReached) return;
@@ -43,10 +44,12 @@ class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
         catBreedsListLoading: true,
         catBreedsListError: false,
         catBreedsList: [],
+        catBreedsSearch: event.searchText ?? state.catBreedsSearchText
       ));
       final failureOrData = await getCatBreedsUseCase(GetCatBreedsParams(
         limit: limit,
         page: state.catBreedsListPage,
+        searchText: state.catBreedsSearchText
       ));
       failureOrData.fold(
         (failure) => emit(state.copyWith(

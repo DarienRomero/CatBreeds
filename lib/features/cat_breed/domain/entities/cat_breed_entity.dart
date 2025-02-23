@@ -212,6 +212,8 @@ class CatBreedEntity extends Equatable{
 
   bool get isEmpty => id == '';
 
+  String get imageUrl => "https://cdn2.thecatapi.com/images/$referenceImageId.jpg";
+
   //Create empty static getter
   static CatBreedEntity get empty => CatBreedEntity(
     weight: CatWeightEntity.empty,

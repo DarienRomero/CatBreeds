@@ -5,8 +5,10 @@ abstract class CatBreedsEvent {
 }
 class StartGetCatBreeds extends CatBreedsEvent {
   final bool reset;
+  final String? searchText;
   StartGetCatBreeds({
-    this.reset = false
+    this.reset = false,
+    this.searchText
   });
 }
 

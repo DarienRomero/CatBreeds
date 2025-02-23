@@ -14,9 +14,9 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
   CatBreedsRemoteRepositoryDataSourceImpl({required this.client});
   
   @override
-  Future<List<CatBreedModel>> getCatBreeds(int limit, int page) async {
+  Future<List<CatBreedModel>> getCatBreeds(int limit, int page, String searchText) async {
     try{
-      final url = "$baseUrl?api_key=$apiKey&limit=$limit&page=$page";
+      final url = "$baseUrl?api_key=$apiKey&limit=$limit&page=$page&q=$searchText";
       final response = await HttpWrapper.get(
         client: client,
         url: url,

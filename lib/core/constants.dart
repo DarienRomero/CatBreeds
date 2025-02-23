@@ -7,3 +7,5 @@ const header = {"Content-type": "application/json", "Accept": "application/json"
 const int limit = 10;
 
 const double scrollThreshold = 100;
+
+const int defaultFirstPage = 0;

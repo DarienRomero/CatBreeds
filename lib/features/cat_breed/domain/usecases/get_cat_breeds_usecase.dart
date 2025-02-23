@@ -18,9 +18,11 @@ class GetCatBreedsUseCase implements UseCase<List<CatBreedEntity>, GetCatBreedsP
 class GetCatBreedsParams {
   final int limit;
   final int page;
+  final String searchText;
 
   GetCatBreedsParams({
     required this.limit,
     required this.page,
+    required this.searchText,
   });
 }

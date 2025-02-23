@@ -1,4 +1,5 @@
 import 'package:cat_breeds/core/constants.dart';
+import 'package:cat_breeds/core/utils.dart';
 import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_bloc.dart';
 import 'package:cat_breeds/features/cat_breed/presentation/widgets/cat_breed_card.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/empty_view.dart';
@@ -38,21 +39,28 @@ class _CatBreedsListState extends State<CatBreedsList> {
       builder: (context, catBreedsState){
         return catBreedsState.catBreedsListLoading ? 
         const LoadingView(
-          heigth: 60
+          heigth: 80
         ) : catBreedsState.catBreedsListError ? const ErrorView(
-          heigth: 60
+          heigth: 80
         ) : catBreedsState.catBreedsList.isEmpty ? const EmptyView(
-          heigth: 60
-        ) : ListView.separated(
-          controller: scrollController,
-          itemCount: catBreedsState.catBreedsList.length,
-          separatorBuilder: (context, index) => const VSpacing(2),
-          itemBuilder: (context, index) {
-            final item = catBreedsState.catBreedsList[index];
-            return CatBreedCard(
-              catBreedEntity: item
-            );
-          },
+          heigth: 80
+        ) : SizedBox(
+          height: mqHeigth(context, 80),
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(
+              vertical: 0,
+              horizontal: mqWidth(context, 5)
+            ),
+            controller: scrollController,
+            itemCount: catBreedsState.catBreedsList.length,
+            separatorBuilder: (context, index) => const VSpacing(2),
+            itemBuilder: (context, index) {
+              final item = catBreedsState.catBreedsList[index];
+              return CatBreedCard(
+                catBreedEntity: item
+              );
+            },
+          ),
         );
       }, 
     );

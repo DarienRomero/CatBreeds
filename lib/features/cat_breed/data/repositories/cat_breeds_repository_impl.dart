@@ -17,7 +17,7 @@ class CatBreedsRepositoryImpl implements CatBreedsRepository{
   @override
   Future<Either<Failure, List<CatBreedEntity>>> getCatBreeds(GetCatBreedsParams body) async{
     try{
-      final response = await catBreedsRemoteRepositoryDataSource.getCatBreeds(body.limit, body.page);
+      final response = await catBreedsRemoteRepositoryDataSource.getCatBreeds(body.limit, body.page, body.searchText);
       return Right(response);
     }on NetworkFailure catch(e){
       return Left(e);

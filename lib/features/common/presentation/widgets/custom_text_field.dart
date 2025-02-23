@@ -134,7 +134,6 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasError = errorMessage.isNotEmpty;
-    final isDarkMode = Theme.of(context).scaffoldBackgroundColor == Colors.black;
 
     return SizedBox(
       width: mqWidth(context, widthPer),
@@ -187,7 +186,7 @@ class CustomTextField extends StatelessWidget {
                 ),
                 hintStyle: hintStyle ?? TextStyle(
                   fontSize: 16,
-                  color: isDarkMode ? const Color(0xff6C757D) : const Color(0xffADB5BD),
+                  color: Colors.grey[400],
                   fontWeight: FontWeight.w400
                 ),
                 fillColor: fillColor,
