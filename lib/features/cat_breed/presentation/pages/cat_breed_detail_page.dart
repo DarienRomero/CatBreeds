@@ -9,40 +9,40 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CatBreedDetailPage extends StatelessWidget {
   final CatBreedEntity catBreedEntity;
-  const CatBreedDetailPage({
-    super.key,
-    required this.catBreedEntity
-  });
+  const CatBreedDetailPage({super.key, required this.catBreedEntity});
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldWrapper(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: Text(catBreedEntity.name),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: mqWidth(context, 5)
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            collapsedHeight: mqHeigth(context, 30),
+            expandedHeight: mqHeigth(context, 30),
+            floating: true,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: const Text(""),
+              centerTitle: true,
+              background: Hero(
+                tag: catBreedEntity.id,
+                child: GeneralImage(
+                  url: catBreedEntity.imageUrl,
+                  width: double.infinity,
+                  height: mqHeigth(context, 30),
+                  borderRadius: 0,
+                  fromLocal: false,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Hero(
-                    tag: catBreedEntity.id,
-                    child: GeneralImage(
-                      url: catBreedEntity.imageUrl,
-                      width: mqWidth(context, 90),
-                      height: mqHeigth(context, 30),
-                      borderRadius: 10,
-                      fromLocal: false,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: mqWidth(context, 5)),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
                   const VSpacing(2),
                   Text(catBreedEntity.name, style: Theme.of(context).textTheme.displayLarge),
                   const VSpacing(2),
@@ -50,25 +50,28 @@ class CatBreedDetailPage extends StatelessWidget {
                   const VSpacing(2),
                   Text("Origin country: ${catBreedEntity.origin}", style: Theme.of(context).textTheme.displayMedium),
                   const VSpacing(1),
-                  Text("Intelligence: ${catBreedEntity.intelligence}", style: Theme.of(context).textTheme.displayMedium),
+                  Text("Intelligence: ${catBreedEntity.intelligence} (5 means highest)", style: Theme.of(context).textTheme.displayMedium),
                   BlocBuilder<CatBreedDetailBloc, CatBreedDetailState>(
-                    builder: (context, catBreedsState){
-                      if(catBreedsState.catBreedError || catBreedsState.catBreedLoading) return Container();
+                    builder: (context, catBreedsState) {
+                      if (catBreedsState.catBreedError || catBreedsState.catBreedLoading) return Container();
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const VSpacing(1),
+                          Text("Life span: ${catBreedsState.catBreed.lifeSpan} years", style: Theme.of(context).textTheme.displayMedium),
+                          const VSpacing(1),
+                          Text("Adaptability: ${catBreedsState.catBreed.adaptability} (5 means highest)", style: Theme.of(context).textTheme.displayMedium),
+                          const VSpacing(1),
                           Text("Weight: ${catBreedsState.catBreed.weight.metric} kg", style: Theme.of(context).textTheme.displayMedium),
                         ],
                       );
-                    }
+                    },
                   ),
-
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

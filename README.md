@@ -1,4 +1,4 @@
-CatBreeds Aplication
+# CatBreeds Aplication
 
 ## Features
 
@@ -9,7 +9,7 @@ CatBreeds Aplication
   <li>Sentry implemented to catch potential errors</li>
 </ol>
 
-# Steps to Set Up the App
+## Steps to Set Up the App
 1. Clone the project using Flutter 3.24.3 - Java 17
 2. Run ```pub get``` to load the dependencies
 3. Change the Sentry URL
@@ -19,7 +19,7 @@ CatBreeds Aplication
 ```flutter build ios --release```
 
 
-# Possible improves
+## Possible improves
 1. Skeleton loading effects
 2. Responsive for table size screens
 3. Implement Flavors
