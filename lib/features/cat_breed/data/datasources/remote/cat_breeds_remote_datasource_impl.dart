@@ -7,6 +7,7 @@ import 'package:cat_breeds/core/http_wrapper.dart';
 import 'package:cat_breeds/features/cat_breed/data/datasources/remote/cat_breeds_remote_datasource.dart';
 import 'package:cat_breeds/features/cat_breed/data/models/cat_breed_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteRepositoryDataSource{
 
@@ -16,8 +17,8 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
   
   @override
   Future<List<CatBreedModel>> getCatBreeds(int limit, int page, String searchText) async {
+    final searchUrlSection = searchText.isNotEmpty ? "/search" : "";
     try{
-      final searchUrlSection = searchText.isNotEmpty ? "/search" : "";
       final url = "$baseUrl$searchUrlSection?api_key=$apiKey&limit=$limit&page=$page&q=$searchText";
       final response = await HttpWrapper.get(
         client: client,
@@ -27,6 +28,9 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
       if(response.statusCode == 200){
         return catBreedsModelFromJson(response.body);
       }else{
+        await Sentry.captureMessage(
+          "URL: $searchUrlSection - METHOD: GET - RESPONSE: ${response.body}",
+        );
         throw invalidDataFailureFromMap(response.body);
       }
     } on SocketException {
@@ -34,14 +38,17 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
     } on InvalidDataFailure{
       rethrow;
     }catch(e){
+      await Sentry.captureMessage(
+        "URL: $searchUrlSection - METHOD: GET - EXCEPTION: $e",
+      );
       throw UnknownFailure.exception;
     }
   }
 
   @override
   Future<CatBreedModel> getCatBreed(String catBreedId) async {
+    final url = "$baseUrl/$catBreedId?api_key=$apiKey";
     try{
-      final url = "$baseUrl/$catBreedId?api_key=$apiKey";
       final response = await HttpWrapper.get(
         client: client,
         url: url,
@@ -51,6 +58,9 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
         log(response.body);
         return catBreedModelFromJson(response.body);
       }else{
+        await Sentry.captureMessage(
+          "URL: $url - METHOD: GET - RESPONSE: ${response.body}",
+        );
         throw invalidDataFailureFromMap(response.body);
       }
     } on SocketException {
@@ -58,6 +68,9 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
     } on InvalidDataFailure{
       rethrow;
     }catch(e){
+      await Sentry.captureMessage(
+        "URL: $url - METHOD: GET - EXCEPTION: $e",
+      );
       throw UnknownFailure.exception;
     }
   }
