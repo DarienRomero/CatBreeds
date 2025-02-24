@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cat_breeds/core/navigation.dart';
 import 'package:cat_breeds/core/utils.dart';
 import 'package:cat_breeds/features/cat_breed/domain/entities/cat_breed_entity.dart';
-import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_bloc.dart';
+import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breed_detail/cat_breed_detail_bloc.dart';
 import 'package:cat_breeds/features/cat_breed/presentation/pages/cat_breed_detail_page.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/custom_button.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/general_image.dart';
@@ -90,7 +90,7 @@ class CatBreedCard extends StatelessWidget {
     );
   }
   void searchAndNavigate(BuildContext context, CatBreedEntity catBreedEntity){
-    BlocProvider.of<CatBreedsBloc>(context, listen: false).add(StartGetCatBreed(
+    BlocProvider.of<CatBreedDetailBloc>(context, listen: false).add(StartGetCatBreed(
       catBreedId: catBreedEntity.id
     ));
     Navigator.push(context, cupertinoNavigationRoute(context, CatBreedDetailPage(

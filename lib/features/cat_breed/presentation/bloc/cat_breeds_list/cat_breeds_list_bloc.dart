@@ -1,31 +1,25 @@
 import 'package:cat_breeds/core/constants.dart';
 import 'package:cat_breeds/features/cat_breed/domain/entities/cat_breed_entity.dart';
-import 'package:cat_breeds/features/cat_breed/domain/usecases/get_cat_breed_usecase.dart';
 import 'package:cat_breeds/features/cat_breed/domain/usecases/get_cat_breeds_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'cat_breeds_event.dart';
-part 'cat_breeds_state.dart';
+part 'cat_breeds_list_event.dart';
+part 'cat_breeds_list_state.dart';
 
-class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
+class CatBreedsListBloc extends Bloc<CatBreedsListEvent, CatBreedsListState> {
 
   final GetCatBreedsUseCase getCatBreedsUseCase;
-  final GetCatBreedUseCase getCatBreedUseCase;
 
-  CatBreedsBloc({
+  CatBreedsListBloc({
     required this.getCatBreedsUseCase,
-    required this.getCatBreedUseCase,
-  }) : super( CatBreedsState(
-    catBreedsList: const [],
+  }) : super( const CatBreedsListState(
+    catBreedsList: [],
     catBreedsListError: false,
     catBreedsListLoading: false,
     catBreedsListPage: defaultFirstPage,
     catBreedsLimitReached: false,
     catBreedsSearchText: "",
-    catBreedLoading: false,
-    catBreedError: false,
-    catBreed: CatBreedEntity.empty,
   ) ) {
     on<StartGetCatBreeds>((event, emit) async {
       if(event.reset){
@@ -65,29 +59,6 @@ class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
             catBreedsLimitReached: data.length < limit
           ));
         }
-      );
-    });
-
-    on<StartGetCatBreed>((event, emit) async {
-      emit(state.copyWith(
-        catBreedLoading: true,
-        catBreedError: false,
-        catBreed: CatBreedEntity.empty
-      ));
-      final failureOrData = await getCatBreedUseCase(GetCatBreedParams(
-        catBreedId: event.catBreedId,
-      ));
-      failureOrData.fold(
-        (failure) => emit(state.copyWith(
-          catBreedLoading: false,
-          catBreedError: true,
-          catBreed: CatBreedEntity.empty
-        )), 
-        (data) => emit(state.copyWith(
-          catBreedLoading: false,
-          catBreedError: false,
-          catBreed: data
-        ))
       );
     });
   }

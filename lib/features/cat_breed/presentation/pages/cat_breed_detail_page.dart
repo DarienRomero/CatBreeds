@@ -1,6 +1,6 @@
 import 'package:cat_breeds/core/utils.dart';
 import 'package:cat_breeds/features/cat_breed/domain/entities/cat_breed_entity.dart';
-import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_bloc.dart';
+import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breed_detail/cat_breed_detail_bloc.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/general_image.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/scaffold_wrapper.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/v_spacing.dart';
@@ -51,7 +51,7 @@ class CatBreedDetailPage extends StatelessWidget {
                   Text("Origin country: ${catBreedEntity.origin}", style: Theme.of(context).textTheme.displayMedium),
                   const VSpacing(1),
                   Text("Intelligence: ${catBreedEntity.intelligence}", style: Theme.of(context).textTheme.displayMedium),
-                  BlocBuilder<CatBreedsBloc, CatBreedsState>(
+                  BlocBuilder<CatBreedDetailBloc, CatBreedDetailState>(
                     builder: (context, catBreedsState){
                       if(catBreedsState.catBreedError || catBreedsState.catBreedLoading) return Container();
                       return Column(

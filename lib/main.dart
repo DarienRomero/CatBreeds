@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:cat_breeds/core/themes.dart';
-import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_bloc.dart';
+import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breed_detail/cat_breed_detail_bloc.dart';
+import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_list/cat_breeds_list_bloc.dart';
 import 'package:cat_breeds/features/common/presentation/pages/router_page.dart';
 import 'package:cat_breeds/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => serviceLocator.get<CatBreedsBloc>()),
+        BlocProvider(create: (_) => serviceLocator.get<CatBreedsListBloc>()),
+        BlocProvider(create: (_) => serviceLocator.get<CatBreedDetailBloc>()),
       ],
       child: MaterialApp(
         title: 'DeportesApp',

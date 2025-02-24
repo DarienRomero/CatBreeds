@@ -1,9 +1,9 @@
-part of 'cat_breeds_bloc.dart';
+part of 'cat_breed_detail_bloc.dart';
 @immutable
-abstract class CatBreedsEvent {
+abstract class CatBreedDetailEvent {
   
 }
-class StartGetCatBreeds extends CatBreedsEvent {
+class StartGetCatBreeds extends CatBreedDetailEvent {
   final bool reset;
   final String? searchText;
   StartGetCatBreeds({
@@ -12,7 +12,7 @@ class StartGetCatBreeds extends CatBreedsEvent {
   });
 }
 
-class StartGetCatBreed extends CatBreedsEvent {
+class StartGetCatBreed extends CatBreedDetailEvent {
   final String catBreedId;
   StartGetCatBreed({
     required this.catBreedId

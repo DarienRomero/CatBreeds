@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_bloc.dart';
+import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_list/cat_breeds_list_bloc.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +25,7 @@ class _CatBreedsSearchInputState extends State<CatBreedsSearchInput> {
       onChanged: (value){
         timer?.cancel();
         timer = Timer(const Duration(milliseconds: 500), () {
-          BlocProvider.of<CatBreedsBloc>(context, listen: false).add(StartGetCatBreeds(
+          BlocProvider.of<CatBreedsListBloc>(context, listen: false).add(StartGetCatBreeds(
             searchText: value,
             reset: true
           ));

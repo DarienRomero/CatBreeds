@@ -1,6 +1,6 @@
 import 'package:cat_breeds/core/constants.dart';
 import 'package:cat_breeds/core/utils.dart';
-import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_bloc.dart';
+import 'package:cat_breeds/features/cat_breed/presentation/bloc/cat_breeds_list/cat_breeds_list_bloc.dart';
 import 'package:cat_breeds/features/cat_breed/presentation/widgets/cat_breed_card.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/empty_view.dart';
 import 'package:cat_breeds/features/common/presentation/widgets/error_view.dart';
@@ -23,11 +23,11 @@ class _CatBreedsListState extends State<CatBreedsList> {
     super.initState();
     scrollController.addListener( () {
       if(scrollController.offset >= scrollController.position.maxScrollExtent - scrollThreshold){
-        BlocProvider.of<CatBreedsBloc>(context, listen: false).add(StartGetCatBreeds());
+        BlocProvider.of<CatBreedsListBloc>(context, listen: false).add(StartGetCatBreeds());
       }
     });
     WidgetsBinding.instance.addPostFrameCallback((_){
-      BlocProvider.of<CatBreedsBloc>(context, listen: false).add(StartGetCatBreeds(
+      BlocProvider.of<CatBreedsListBloc>(context, listen: false).add(StartGetCatBreeds(
         reset: true
       ));
     });
@@ -35,7 +35,7 @@ class _CatBreedsListState extends State<CatBreedsList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CatBreedsBloc, CatBreedsState>(
+    return BlocBuilder<CatBreedsListBloc, CatBreedsListState>(
       builder: (context, catBreedsState){
         return catBreedsState.catBreedsListLoading && catBreedsState.catBreedsList.isEmpty? 
         const LoadingView(
