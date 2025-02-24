@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cat_breeds/core/constants.dart';
@@ -47,6 +48,7 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
         headers: header,
       );
       if(response.statusCode == 200){
+        log(response.body);
         return catBreedModelFromJson(response.body);
       }else{
         throw invalidDataFailureFromMap(response.body);
