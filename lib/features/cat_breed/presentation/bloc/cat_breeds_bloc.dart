@@ -23,9 +23,9 @@ class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
     catBreedsListPage: defaultFirstPage,
     catBreedsLimitReached: false,
     catBreedsSearchText: "",
-    catBreedListLoading: false,
-    catBreedListError: false,
-    catBreedList: CatBreedEntity.empty,
+    catBreedLoading: false,
+    catBreedError: false,
+    catBreed: CatBreedEntity.empty,
   ) ) {
     on<StartGetCatBreeds>((event, emit) async {
       if(event.reset){
@@ -34,7 +34,7 @@ class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
           catBreedsListLoading: false,
           catBreedsListError: false,
           catBreedsList: [],
-          catBreedsSearch: "",
+          catBreedsSearchText: "",
           catBreedsLimitReached: false
         ));
       }
@@ -43,8 +43,7 @@ class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
       emit(state.copyWith(
         catBreedsListLoading: true,
         catBreedsListError: false,
-        catBreedsList: [],
-        catBreedsSearch: event.searchText ?? state.catBreedsSearchText
+        catBreedsSearchText: event.searchText ?? state.catBreedsSearchText
       ));
       final failureOrData = await getCatBreedsUseCase(GetCatBreedsParams(
         limit: limit,
@@ -71,23 +70,23 @@ class CatBreedsBloc extends Bloc<CatBreedsEvent, CatBreedsState> {
 
     on<StartGetCatBreed>((event, emit) async {
       emit(state.copyWith(
-        catBreedListLoading: true,
-        catBreedListError: false,
-        catBreedList: CatBreedEntity.empty
+        catBreedLoading: true,
+        catBreedError: false,
+        catBreed: CatBreedEntity.empty
       ));
       final failureOrData = await getCatBreedUseCase(GetCatBreedParams(
         catBreedId: event.catBreedId,
       ));
       failureOrData.fold(
         (failure) => emit(state.copyWith(
-          catBreedListLoading: false,
-          catBreedListError: true,
-          catBreedList: CatBreedEntity.empty
+          catBreedLoading: false,
+          catBreedError: true,
+          catBreed: CatBreedEntity.empty
         )), 
         (data) => emit(state.copyWith(
-          catBreedListLoading: false,
-          catBreedListError: false,
-          catBreedList: data
+          catBreedLoading: false,
+          catBreedError: false,
+          catBreed: data
         ))
       );
     });

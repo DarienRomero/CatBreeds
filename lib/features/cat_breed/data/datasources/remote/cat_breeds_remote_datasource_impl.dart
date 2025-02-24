@@ -16,7 +16,8 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
   @override
   Future<List<CatBreedModel>> getCatBreeds(int limit, int page, String searchText) async {
     try{
-      final url = "$baseUrl?api_key=$apiKey&limit=$limit&page=$page&q=$searchText";
+      final searchUrlSection = searchText.isNotEmpty ? "/search" : "";
+      final url = "$baseUrl$searchUrlSection?api_key=$apiKey&limit=$limit&page=$page&q=$searchText";
       final response = await HttpWrapper.get(
         client: client,
         url: url,
@@ -25,10 +26,6 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
       if(response.statusCode == 200){
         return catBreedsModelFromJson(response.body);
       }else{
-        //TODO: Terminar
-        // await loggingRepository.logMessage(
-        //   "startWorkshift /worker/iniciarTurno/$workerId EXCEPTION: BODY: none RESPONSE: ${response.body}",
-        // );
         throw invalidDataFailureFromMap(response.body);
       }
     } on SocketException {
@@ -41,7 +38,7 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
   }
 
   @override
-  Future<CatBreedModel> getCatBreed(int catBreedId) async {
+  Future<CatBreedModel> getCatBreed(String catBreedId) async {
     try{
       final url = "$baseUrl/$catBreedId?api_key=$apiKey";
       final response = await HttpWrapper.get(
@@ -52,10 +49,6 @@ class CatBreedsRemoteRepositoryDataSourceImpl implements CatBreedsRemoteReposito
       if(response.statusCode == 200){
         return catBreedModelFromJson(response.body);
       }else{
-        //TODO: Terminar
-        // await loggingRepository.logMessage(
-        //   "startWorkshift /worker/iniciarTurno/$workerId EXCEPTION: BODY: none RESPONSE: ${response.body}",
-        // );
         throw invalidDataFailureFromMap(response.body);
       }
     } on SocketException {

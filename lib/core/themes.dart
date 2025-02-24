@@ -12,8 +12,13 @@ class Themes {
         fontWeight: FontWeight.w600
       ),
       displayMedium: TextStyle(
-        color: Colors.grey[600]!,
+        color: Colors.grey[700]!,
         fontSize: 16,
+        fontWeight: FontWeight.w400
+      ),
+      displaySmall: const TextStyle(
+        color: Colors.black,
+        fontSize: 14,
         fontWeight: FontWeight.w400
       ),
     )

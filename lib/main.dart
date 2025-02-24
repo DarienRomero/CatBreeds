@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         title: 'DeportesApp',
         debugShowCheckedModeBanner: false,
         theme: Themes.lightMode,
-        home: RouterPage()
+        home: const RouterPage()
       ),
     );
   }

@@ -59,7 +59,7 @@ class CustomIconButton extends StatelessWidget {
 
   /// Creates a customizable icon button widget.
   const CustomIconButton({
-    Key? key,
+    super.key,
     required this.size,
     required this.onPressed,
     this.onLongPress,
@@ -71,7 +71,7 @@ class CustomIconButton extends StatelessWidget {
     this.splashColor,
     this.heightRef = false,
     this.borderWidth = 1,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

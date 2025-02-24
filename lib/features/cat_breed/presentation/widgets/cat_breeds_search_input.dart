@@ -25,11 +25,10 @@ class _CatBreedsSearchInputState extends State<CatBreedsSearchInput> {
       onChanged: (value){
         timer?.cancel();
         timer = Timer(const Duration(milliseconds: 500), () {
-          if(value.length > 2){
-            BlocProvider.of<CatBreedsBloc>(context, listen: false).add(StartGetCatBreeds(
-              searchText: value
-            ));
-          }
+          BlocProvider.of<CatBreedsBloc>(context, listen: false).add(StartGetCatBreeds(
+            searchText: value,
+            reset: true
+          ));
         });
       },
     );

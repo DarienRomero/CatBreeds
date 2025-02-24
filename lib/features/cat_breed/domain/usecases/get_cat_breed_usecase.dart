@@ -17,7 +17,7 @@ class GetCatBreedUseCase implements UseCase<CatBreedEntity, GetCatBreedParams>{
 }
 
 class GetCatBreedParams {
-  final int catBreedId;
+  final String catBreedId;
 
   GetCatBreedParams({
     required this.catBreedId,

@@ -18,9 +18,9 @@ class EmptyView extends StatelessWidget {
 
   /// Creates an empty view widget with a customizable height.
   const EmptyView({
-    Key? key,
+    super.key,
     required this.heigth,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

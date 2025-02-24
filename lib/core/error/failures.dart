@@ -17,12 +17,9 @@ abstract class Failure extends Equatable{
 
 class UnknownFailure extends Failure{
   const UnknownFailure({
-    required int statusCode, 
-    required List<String> messages
-  }) : super(
-    statusCode: statusCode, 
-    messages: messages
-  );
+    required super.statusCode, 
+    required super.messages
+  });
   static get exception => const UnknownFailure(
     messages: ["Error desconocido"], 
     statusCode: 406
@@ -31,12 +28,9 @@ class UnknownFailure extends Failure{
 
 class NotFoundFailure extends Failure{
   const NotFoundFailure({
-    required int statusCode, 
-    required List<String> messages
-  }) : super(
-    statusCode: statusCode, 
-    messages: messages
-  );
+    required super.statusCode, 
+    required super.messages
+  });
   static get exception => const UnknownFailure(
     messages: ["No encontrado"], 
     statusCode: 405
@@ -45,12 +39,9 @@ class NotFoundFailure extends Failure{
 
 class NetworkFailure extends Failure{
   const NetworkFailure({
-    required int statusCode, 
-    required List<String> messages
-  }) : super(
-    statusCode: statusCode, 
-    messages: messages
-  );
+    required super.statusCode, 
+    required super.messages
+  });
   static get exception => const NetworkFailure(
     messages: ["Connection error"], 
     statusCode: 500
@@ -61,12 +52,9 @@ InvalidDataFailure invalidDataFailureFromMap(String str) => InvalidDataFailure.f
 
 class InvalidDataFailure extends Failure{
   const InvalidDataFailure({
-    required int statusCode, 
-    required List<String> messages
-  }) : super(
-    statusCode: statusCode, 
-    messages: messages
-  );
+    required super.statusCode, 
+    required super.messages
+  });
 
   factory InvalidDataFailure.fromMap(Map<String, dynamic> json) => InvalidDataFailure(
     statusCode: json["status_code"]  ?? -1,

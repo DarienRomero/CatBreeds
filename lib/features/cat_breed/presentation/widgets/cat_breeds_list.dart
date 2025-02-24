@@ -37,30 +37,45 @@ class _CatBreedsListState extends State<CatBreedsList> {
   Widget build(BuildContext context) {
     return BlocBuilder<CatBreedsBloc, CatBreedsState>(
       builder: (context, catBreedsState){
-        return catBreedsState.catBreedsListLoading ? 
+        return catBreedsState.catBreedsListLoading && catBreedsState.catBreedsList.isEmpty? 
         const LoadingView(
           heigth: 80
         ) : catBreedsState.catBreedsListError ? const ErrorView(
           heigth: 80
         ) : catBreedsState.catBreedsList.isEmpty ? const EmptyView(
           heigth: 80
-        ) : SizedBox(
-          height: mqHeigth(context, 80),
-          child: ListView.separated(
-            padding: EdgeInsets.symmetric(
-              vertical: 0,
-              horizontal: mqWidth(context, 5)
+        ) : Stack(
+          children: [
+            SizedBox(
+              height: mqHeigth(context, 80),
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(
+                  vertical: 0,
+                  horizontal: mqWidth(context, 5)
+                ),
+                controller: scrollController,
+                itemCount: catBreedsState.catBreedsList.length,
+                separatorBuilder: (context, index) => const VSpacing(2),
+                itemBuilder: (context, index) {
+                  final item = catBreedsState.catBreedsList[index];
+                  return CatBreedCard(
+                    catBreedEntity: item
+                  );
+                },
+              ),
             ),
-            controller: scrollController,
-            itemCount: catBreedsState.catBreedsList.length,
-            separatorBuilder: (context, index) => const VSpacing(2),
-            itemBuilder: (context, index) {
-              final item = catBreedsState.catBreedsList[index];
-              return CatBreedCard(
-                catBreedEntity: item
-              );
-            },
-          ),
+            if(catBreedsState.catBreedsListLoading && catBreedsState.catBreedsList.isNotEmpty)
+              Positioned(
+                bottom: mqHeigth(context, 2),
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                )
+              )
+          ],
         );
       }, 
     );

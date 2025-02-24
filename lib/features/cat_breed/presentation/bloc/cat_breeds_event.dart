@@ -13,7 +13,7 @@ class StartGetCatBreeds extends CatBreedsEvent {
 }
 
 class StartGetCatBreed extends CatBreedsEvent {
-  final int catBreedId;
+  final String catBreedId;
   StartGetCatBreed({
     required this.catBreedId
   });

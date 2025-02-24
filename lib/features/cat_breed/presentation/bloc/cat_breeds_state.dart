@@ -9,9 +9,9 @@ class CatBreedsState {
   final bool catBreedsLimitReached;
   final String catBreedsSearchText;
 
-  final bool catBreedListLoading;
-  final bool catBreedListError;
-  final CatBreedEntity catBreedList;
+  final bool catBreedLoading;
+  final bool catBreedError;
+  final CatBreedEntity catBreed;
 
   const CatBreedsState({
     required this.catBreedsListLoading,
@@ -20,9 +20,9 @@ class CatBreedsState {
     required this.catBreedsListPage,
     required this.catBreedsLimitReached,
     required this.catBreedsSearchText,
-    required this.catBreedListLoading,
-    required this.catBreedListError,
-    required this.catBreedList,
+    required this.catBreedLoading,
+    required this.catBreedError,
+    required this.catBreed,
   });
 
   CatBreedsState copyWith({
@@ -31,19 +31,19 @@ class CatBreedsState {
     List<CatBreedEntity>? catBreedsList,
     int? catBreedsListPage,
     bool? catBreedsLimitReached,
-    String? catBreedsSearch,
-    bool? catBreedListLoading,
-    bool? catBreedListError,
-    CatBreedEntity? catBreedList,
+    String? catBreedsSearchText,
+    bool? catBreedLoading,
+    bool? catBreedError,
+    CatBreedEntity? catBreed,
   }) => CatBreedsState(
     catBreedsListLoading: catBreedsListLoading ?? this.catBreedsListLoading,
     catBreedsListError: catBreedsListError ?? this.catBreedsListError,
     catBreedsList: catBreedsList ?? this.catBreedsList,
     catBreedsListPage: catBreedsListPage ?? this.catBreedsListPage,
     catBreedsLimitReached: catBreedsLimitReached ?? this.catBreedsLimitReached,
-    catBreedsSearchText: catBreedsSearch ?? this.catBreedsSearchText,
-    catBreedListLoading: catBreedListLoading ?? this.catBreedListLoading,
-    catBreedListError: catBreedListError ?? this.catBreedListError,
-    catBreedList: catBreedList ?? this.catBreedList,
+    catBreedsSearchText: catBreedsSearchText ?? this.catBreedsSearchText,
+    catBreedLoading: catBreedLoading ?? this.catBreedLoading,
+    catBreedError: catBreedError ?? this.catBreedError,
+    catBreed: catBreed ?? this.catBreed,
   );
 }

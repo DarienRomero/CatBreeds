@@ -107,6 +107,15 @@ class GeneralImage extends StatelessWidget {
                       width: width,
                       height: height,
                       fit: fit,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          notFoundImage,
+                          width: width,
+                          height: height,
+                          fit: fit,
+                          alignment: alignment,
+                        );
+                      },
                     ))
               : Image.asset(
                   url,
