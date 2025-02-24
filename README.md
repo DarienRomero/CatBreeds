@@ -1,5 +1,11 @@
 # CatBreeds Aplication
 
+## Captures
+
+![](https://github.com/DarienRomero/CatBreeds/blob/master/.github/art/list.jpg?raw=true)
+![](https://github.com/DarienRomero/CatBreeds/blob/master/.github/art/detail.jpg?raw=true)
+
+
 ## Features
 
 <ol>
