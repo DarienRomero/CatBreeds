@@ -1,16 +1,28 @@
-# cat_breeds
+CatBreeds Aplication
 
-A new Flutter project.
+## Features
 
-## Getting Started
+<ol>
+  <li>Full clean architecture divided into features</li>
+  <li>Common Widgets fully documented</li>
+  <li>Responsive and font size management</li>
+  <li>Sentry implemented to catch potential errors</li>
+</ol>
 
-This project is a starting point for a Flutter application.
+# Steps to Set Up the App
+1. Clone the project using Flutter 3.24.3 - Java 17
+2. Run ```pub get``` to load the dependencies
+3. Change the Sentry URL
+4. To generate the release for Android, use (Make sure to modify the versionCode and versionName)
+```flutter build appbundle --target-platform android-arm,android-arm64,android-x64```
+5. To generate the release for iOS, use the following command and then run 'Archive' in XCode (Modify the versionCode and versionName).
+```flutter build ios --release```
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# Possible improves
+1. Skeleton loading effects
+2. Responsive for table size screens
+3. Implement Flavors
+4. Security: Obfuscation, protection agains root devices, SSL pinning, and others.
+5. Analytics to collect usage information
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
