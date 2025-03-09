@@ -76,7 +76,7 @@ class ScaffoldWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Restrict the text scale factor to a range between 1.0 and 1.2.
-    final bounded = MediaQuery.of(context).textScaleFactor.clamp(1.0, 1.2);
+    final bounded = MediaQuery.of(context).textScaleFactor.clamp(1.2, 1.2);
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: bounded),
